@@ -43,24 +43,6 @@
       --metric-bg: #202522;
     }
 
-    :root[data-theme="clay"] {
-      --bg: #f7f1ed;
-      --paper: #fffaf6;
-      --ink: #2d2421;
-      --muted: #756863;
-      --line: #ddc9bf;
-      --teal: #9b574f;
-      --teal-dark: #74363c;
-      --coral: #c96f55;
-      --amber: #c68d2e;
-      --blue: #5d6f8c;
-      --shadow: 0 18px 50px rgba(69, 45, 37, 0.13);
-      --topbar-bg: rgba(247, 241, 237, 0.92);
-      --lead: #473d39;
-      --panel-soft: #fbf1eb;
-      --metric-bg: rgba(255, 250, 246, 0.76);
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -159,8 +141,33 @@
       transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.35s ease;
     }
 
+    .theme-switcher {
+      position: relative;
+      isolation: isolate;
+      min-width: 178px;
+    }
+
+    .theme-switcher::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 4px;
+      z-index: 0;
+      width: calc((100% - 8px) / 2);
+      border-radius: 999px;
+      background: var(--ink);
+      box-shadow: 0 8px 18px rgba(25, 33, 31, 0.12);
+      transition: transform 0.28s ease, background 0.28s ease;
+    }
+
+    .theme-switcher.is-dark::before {
+      transform: translateX(100%);
+    }
+
     .switcher button {
       position: relative;
+      z-index: 1;
       min-width: 36px;
       min-height: 36px;
       padding: 6px 10px;
@@ -187,6 +194,11 @@
       box-shadow: 0 8px 18px rgba(25, 33, 31, 0.12);
     }
 
+    .theme-switcher button.is-active {
+      background: transparent;
+      box-shadow: none;
+    }
+
     [data-theme-choice] {
       display: inline-flex;
       align-items: center;
@@ -204,10 +216,6 @@
 
     [data-theme-choice="dark"]::before {
       background: #202522;
-    }
-
-    [data-theme-choice="clay"]::before {
-      background: #c96f55;
     }
 
     html.theme-shift body {
@@ -1033,10 +1041,9 @@
           <button type="button" data-language="ru" class="is-active">RU</button>
           <button type="button" data-language="en">EN</button>
         </div>
-        <div class="switcher" aria-label="Переключение темы">
-          <button type="button" data-theme-choice="sage" class="is-active" data-i18n="themeSage">База</button>
+        <div class="switcher theme-switcher" aria-label="Переключение темы">
+          <button type="button" data-theme-choice="sage" class="is-active" data-i18n="themeSage">Светлая</button>
           <button type="button" data-theme-choice="dark" data-i18n="themeDark">Темная</button>
-          <button type="button" data-theme-choice="clay" data-i18n="themeClay">Теплая</button>
         </div>
       </div>
     </div>
@@ -1363,9 +1370,8 @@
         navProjects: "Проекты",
         navResume: "Опыт",
         navContact: "Контакты",
-        themeSage: "База",
+        themeSage: "Светлая",
         themeDark: "Темная",
-        themeClay: "Теплая",
         heroEyebrow: "Analyst / 1С / Business Processes / BI",
         heroTitle: "Аналитик: данные, процессы и понятная отчетность.",
         heroLead: "Работаю на стыке отчетности, 1С, бизнес-процессов и управленческой аналитики: структурирую данные, описываю требования, проверяю качество выгрузок и собираю понятные артефакты для бизнеса и команды разработки.",
@@ -1460,9 +1466,8 @@
         navProjects: "Projects",
         navResume: "Experience",
         navContact: "Contacts",
-        themeSage: "Base",
+        themeSage: "Light",
         themeDark: "Dark",
-        themeClay: "Warm",
         heroEyebrow: "Analyst / 1C / Business Processes / BI",
         heroTitle: "Analyst: data, processes and clear reporting.",
         heroLead: "I work at the intersection of reporting, 1C, business processes and management analytics: structuring data, describing requirements, checking export quality and preparing clear artifacts for business and development teams.",
@@ -1555,6 +1560,7 @@
     const root = document.documentElement;
     const languageButtons = document.querySelectorAll("[data-language]");
     const themeButtons = document.querySelectorAll("[data-theme-choice]");
+    const themeSwitcher = document.querySelector(".theme-switcher");
     const descriptionMeta = document.querySelector('meta[name="description"]');
 
     function applyLanguage(language) {
@@ -1578,20 +1584,22 @@
     }
 
     function applyTheme(theme) {
-      if (theme === "sage") {
+      const selectedTheme = theme === "dark" ? "dark" : "sage";
+      if (selectedTheme === "sage") {
         root.removeAttribute("data-theme");
       } else {
-        root.dataset.theme = theme;
+        root.dataset.theme = selectedTheme;
       }
 
       themeButtons.forEach((button) => {
-        button.classList.toggle("is-active", button.dataset.themeChoice === theme);
-        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === theme));
+        button.classList.toggle("is-active", button.dataset.themeChoice === selectedTheme);
+        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selectedTheme));
       });
+      themeSwitcher.classList.toggle("is-dark", selectedTheme === "dark");
       root.classList.remove("theme-shift");
       void root.offsetWidth;
       root.classList.add("theme-shift");
-      localStorage.setItem("portfolio-theme", theme);
+      localStorage.setItem("portfolio-theme", selectedTheme);
     }
 
     languageButtons.forEach((button) => {
