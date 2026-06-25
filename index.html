@@ -22,6 +22,7 @@
       --topbar-bg: rgba(247, 243, 236, 0.92);
       --lead: #39433f;
       --panel-soft: #f8f5ee;
+      --metric-bg: rgba(255, 253, 248, 0.68);
     }
 
     :root[data-theme="dark"] {
@@ -39,6 +40,7 @@
       --topbar-bg: rgba(21, 24, 22, 0.9);
       --lead: #d7ddd7;
       --panel-soft: #252b27;
+      --metric-bg: #202522;
     }
 
     :root[data-theme="clay"] {
@@ -56,6 +58,7 @@
       --topbar-bg: rgba(247, 241, 237, 0.92);
       --lead: #473d39;
       --panel-soft: #fbf1eb;
+      --metric-bg: rgba(255, 250, 246, 0.76);
     }
 
     * {
@@ -331,7 +334,7 @@
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 253, 248, 0.68);
+      background: var(--metric-bg);
     }
 
     .metric strong {
