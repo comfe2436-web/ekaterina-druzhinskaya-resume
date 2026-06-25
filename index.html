@@ -832,48 +832,12 @@
       padding: 8px 24px 24px;
     }
 
-    .timeline-tabs {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-      padding: 16px 0 8px;
-    }
-
-    .timeline-tab {
-      min-height: 44px;
-      padding: 8px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--panel-soft);
-      color: var(--muted);
-      cursor: pointer;
-      font: inherit;
-      font-size: 12px;
-      font-weight: 850;
-      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
-    }
-
-    .timeline-tab.is-active {
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    .timeline-tab:hover,
-    .timeline-tab:focus-visible {
-      transform: translateY(-1px);
-      outline: none;
-    }
-
     .timeline-item {
       display: grid;
       grid-template-columns: 168px 1fr;
       gap: 18px;
       padding: 22px 0;
       border-bottom: 1px solid var(--line);
-    }
-
-    .timeline-item[hidden] {
-      display: none;
     }
 
     .timeline-item:last-child {
@@ -1104,8 +1068,7 @@
 
       .visual-top,
       .project-stats,
-      .case-flow,
-      .timeline-tabs {
+      .case-flow {
         grid-template-columns: 1fr;
       }
 
@@ -1561,34 +1524,28 @@
             </ul>
           </aside>
           <div class="timeline">
-            <div class="timeline-tabs" role="tablist" aria-label="Навигация по опыту">
-              <button class="timeline-tab is-active" type="button" role="tab" aria-selected="true" data-timeline-target="exp1" data-i18n="timelineTab1">ГАУ ИТЦ</button>
-              <button class="timeline-tab" type="button" role="tab" aria-selected="false" data-timeline-target="exp2" data-i18n="timelineTab2">ИП Дружинская</button>
-              <button class="timeline-tab" type="button" role="tab" aria-selected="false" data-timeline-target="exp3" data-i18n="timelineTab3">Fit Holidays</button>
-              <button class="timeline-tab" type="button" role="tab" aria-selected="false" data-timeline-target="education" data-i18n="timelineTab4">Образование</button>
-            </div>
-            <article class="timeline-item" data-timeline-panel="exp1">
+            <article class="timeline-item">
               <div class="timeline-date" data-i18n="exp1Date">Дек 2025 - апр 2026</div>
               <div>
                 <h3 data-i18n="exp1Title">Ведущий аналитик · ГАУ ИТЦ "Соцзащита" Москвы</h3>
                 <p data-i18n="exp1Text">Сбор, обработка и структурирование данных, подготовка отчетов и визуализаций, автоматизация отчетности в Excel, работа с данными в 1С и контроль качества данных.</p>
               </div>
             </article>
-            <article class="timeline-item" data-timeline-panel="exp2" hidden>
+            <article class="timeline-item">
               <div class="timeline-date" data-i18n="exp2Date">Янв 2022 - фев 2026</div>
               <div>
                 <h3 data-i18n="exp2Title">Администратор · ИП Дружинская</h3>
                 <p data-i18n="exp2Text">Работа с большим объемом документов и данных, оцифровка и структурирование информации, актуализация баз данных, контроль корректности данных, отчеты и сводные таблицы.</p>
               </div>
             </article>
-            <article class="timeline-item" data-timeline-panel="exp3" hidden>
+            <article class="timeline-item">
               <div class="timeline-date" data-i18n="exp3Date">Май 2024 - окт 2024</div>
               <div>
                 <h3 data-i18n="exp3Title">Трансферный гид · Fit Holidays</h3>
                 <p data-i18n="exp3Text">Координация логистики, анализ обратной связи клиентов, выявление повторяющихся проблем и подготовка предложений по улучшению качества сервиса.</p>
               </div>
             </article>
-            <article class="timeline-item" data-timeline-panel="education" hidden>
+            <article class="timeline-item">
               <div class="timeline-date" data-i18n="educationDate">Образование</div>
               <div>
                 <h3 data-i18n="educationTitle">МФЮА · РЭУ им. Г.В. Плеханова</h3>
@@ -1767,10 +1724,6 @@
         exp3Date: "Май 2024 - окт 2024",
         exp3Title: "Трансферный гид · Fit Holidays",
         exp3Text: "Координация логистики, анализ обратной связи клиентов, выявление повторяющихся проблем и подготовка предложений по улучшению качества сервиса.",
-        timelineTab1: "ГАУ ИТЦ",
-        timelineTab2: "ИП Дружинская",
-        timelineTab3: "Fit Holidays",
-        timelineTab4: "Образование",
         educationDate: "Образование",
         educationTitle: "МФЮА · РЭУ им. Г.В. Плеханова",
         educationText: "Магистратура по юриспруденции, правовое обеспечение бизнеса, 2025-2028. Бакалавриат по менеджменту, управление гостиничным и туристическим бизнесом, 2021-2025. Курс: разработка алгоритмов и программных приложений.",
@@ -1913,10 +1866,6 @@
         exp3Date: "May 2024 - Oct 2024",
         exp3Title: "Transfer Guide · Fit Holidays",
         exp3Text: "Logistics coordination, customer feedback analysis, recurring issue discovery and proposals for service quality improvement.",
-        timelineTab1: "IT Center",
-        timelineTab2: "Druzhinskaya",
-        timelineTab3: "Fit Holidays",
-        timelineTab4: "Education",
         educationDate: "Education",
         educationTitle: "MFUA · Plekhanov Russian University of Economics",
         educationText: "Master's degree in law, legal support for business, 2025-2028. Bachelor's degree in management, hospitality and tourism business management, 2021-2025. Course: algorithm and application development.",
@@ -1995,25 +1944,6 @@
         projects.forEach((project) => {
           const tags = project.dataset.tags.split(" ");
           project.hidden = filter !== "all" && !tags.includes(filter);
-        });
-      });
-    });
-
-    const timelineTabs = document.querySelectorAll("[data-timeline-target]");
-    const timelinePanels = document.querySelectorAll("[data-timeline-panel]");
-
-    timelineTabs.forEach((button) => {
-      button.addEventListener("click", () => {
-        const target = button.dataset.timelineTarget;
-
-        timelineTabs.forEach((item) => {
-          const isActive = item === button;
-          item.classList.toggle("is-active", isActive);
-          item.setAttribute("aria-selected", String(isActive));
-        });
-
-        timelinePanels.forEach((panel) => {
-          panel.hidden = panel.dataset.timelinePanel !== target;
         });
       });
     });
